@@ -8,6 +8,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from reportlab.lib.units import inch
 from django.contrib.auth.decorators import login_required
 
+import sk_profiling.settings
 from .models import Profile
 from django.utils.text import slugify
 from .forms import profile_form
@@ -285,8 +286,8 @@ def getPdfPage(request, grade, header):
         records = Profile.objects.filter(education_level="Graduates").order_by(Lower("last_name"))
     else:
         records = Profile.objects.filter(education_year="Grade " + grade).order_by(Lower("last_name"))
-
-    data = {'record': records, "grade": grade, "header": header}
+    STATIC_ROOT = sk_profiling.settings.STATIC_ROOT
+    data = {'record': records, "grade": grade, "header": header, "STATIC_ROOT":STATIC_ROOT}
 
     template = get_template("pdf.html")
     data_p = template.render(data)
@@ -300,4 +301,7 @@ def getPdfPage(request, grade, header):
 
 
 def pdf(response):
-    return render(response,'pdf.html')
+    STATIC_ROOT = sk_profiling.settings.STATIC_ROOT
+    return render(response,'pdf.html',{
+        "STATIC_ROOT":STATIC_ROOT,
+    })
