@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="38e8e435-6bfa-4e18-98c2-f5fa6c63fe54" name="Default Changelist" comment="staticfiles, STATIC_ROOT">
-      <change beforePath="$PROJECT_DIR$/sk_profiling/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/sk_profiling/settings.py" afterDir="false" />
+    <list default="true" id="38e8e435-6bfa-4e18-98c2-f5fa6c63fe54" name="Default Changelist" comment="debug = True">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/profiling/templates/pdf.html" beforeDir="false" afterPath="$PROJECT_DIR$/profiling/templates/pdf.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +89,7 @@
       <workItem from="1650087221197" duration="5030000" />
       <workItem from="1650093955972" duration="368000" />
       <workItem from="1650110784545" duration="2717000" />
-      <workItem from="1650116030008" duration="2467000" />
+      <workItem from="1650116030008" duration="3082000" />
     </task>
     <task id="LOCAL-00001" summary="april 15">
       <created>1650001338746</created>
@@ -153,7 +154,14 @@
       <option name="project" value="LOCAL" />
       <updated>1650118392175</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="debug = True">
+      <created>1650118714834</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1650118714834</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -180,6 +188,7 @@
     <MESSAGE value="fix pdf.html, profiles,add data" />
     <MESSAGE value="test" />
     <MESSAGE value="staticfiles, STATIC_ROOT" />
-    <option name="LAST_COMMIT_MESSAGE" value="staticfiles, STATIC_ROOT" />
+    <MESSAGE value="debug = True" />
+    <option name="LAST_COMMIT_MESSAGE" value="debug = True" />
   </component>
 </project>
