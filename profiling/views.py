@@ -297,3 +297,7 @@ def getPdfPage(request, grade, header):
         return HttpResponse(response.getvalue(), content_type="application/pdf")
     else:
         return HttpResponse("Error Generating PDF")
+
+
+def pdf(response):
+    return render(response,'pdf.html')

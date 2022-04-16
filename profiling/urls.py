@@ -17,6 +17,7 @@ urlpatterns = [
     path('filter_year/', views.profile_filter_year, name="profile_filter_year_page"),
     path('generate_document/', views.generate_document, name="generate_document"),
     path('get_document/<slug:grade>/<slug:header>/', views.getPdfPage, name="get_document"),
+    path('test/',views.pdf, name="pdf")
 
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
