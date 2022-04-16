@@ -1,3 +1,5 @@
+import os
+
 from appdirs import unicode
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -5,10 +7,12 @@ from django.core.exceptions import ValidationError
 from django.db.models.functions import Lower
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
+from pdfkit import pdfkit
 from reportlab.lib.units import inch
 from django.contrib.auth.decorators import login_required
 
 import sk_profiling.settings
+from sk_profiling import settings
 from .models import Profile
 from django.utils.text import slugify
 from .forms import profile_form
@@ -264,12 +268,19 @@ def generate_document(response):
         templist.append({"grade":years, "code":year_code})
 
     print(templist)
+
+
     return render(response,'dashboard/generate_document.html',{
         'current_user': current_user,
         'datas':datas,
         'templist':templist,
 
     })
+
+def pdf(response):
+    return render(response,'pdf.html',{
+    })
+
 @login_required
 def getPdfPage(request, grade, header):
     ok = val()
@@ -277,6 +288,7 @@ def getPdfPage(request, grade, header):
     print(type(ok))
     header = ok["header"]
     print(header)
+
 
     if grade == "College":
         records = Profile.objects.filter(education_level="College").order_by(Lower("last_name"))
@@ -286,8 +298,9 @@ def getPdfPage(request, grade, header):
         records = Profile.objects.filter(education_level="Graduates").order_by(Lower("last_name"))
     else:
         records = Profile.objects.filter(education_year="Grade " + grade).order_by(Lower("last_name"))
-    STATIC_ROOT = sk_profiling.settings.STATIC_ROOT
-    data = {'record': records, "grade": grade, "header": header, "STATIC_ROOT":STATIC_ROOT}
+
+    data = {'record': records, "grade": grade, "header": header,}
+
 
     template = get_template("pdf.html")
     data_p = template.render(data)
@@ -299,9 +312,3 @@ def getPdfPage(request, grade, header):
     else:
         return HttpResponse("Error Generating PDF")
 
-
-def pdf(response):
-    STATIC_ROOT = sk_profiling.settings.STATIC_ROOT
-    return render(response,'pdf.html',{
-        "STATIC_ROOT":STATIC_ROOT,
-    })

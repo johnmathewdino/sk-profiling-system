@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="38e8e435-6bfa-4e18-98c2-f5fa6c63fe54" name="Default Changelist" comment="collectstatic">
+    <list default="true" id="38e8e435-6bfa-4e18-98c2-f5fa6c63fe54" name="Default Changelist" comment="test-image">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/profiling/templates/pdf.html" beforeDir="false" afterPath="$PROJECT_DIR$/profiling/templates/pdf.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/profiling/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/profiling/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +91,8 @@
       <workItem from="1650087221197" duration="5030000" />
       <workItem from="1650093955972" duration="368000" />
       <workItem from="1650110784545" duration="2717000" />
-      <workItem from="1650116030008" duration="4070000" />
+      <workItem from="1650116030008" duration="8990000" />
+      <workItem from="1650131188274" duration="696000" />
     </task>
     <task id="LOCAL-00001" summary="april 15">
       <created>1650001338746</created>
@@ -175,7 +178,14 @@
       <option name="project" value="LOCAL" />
       <updated>1650119737610</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="test-image">
+      <created>1650120286277</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1650120286277</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -205,6 +215,7 @@
     <MESSAGE value="debug = True" />
     <MESSAGE value="change link of img to a url" />
     <MESSAGE value="collectstatic" />
-    <option name="LAST_COMMIT_MESSAGE" value="collectstatic" />
+    <MESSAGE value="test-image" />
+    <option name="LAST_COMMIT_MESSAGE" value="test-image" />
   </component>
 </project>
