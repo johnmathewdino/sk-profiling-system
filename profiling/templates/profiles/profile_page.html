@@ -1,0 +1,224 @@
+{% extends 'dashboard/index.html' %}
+{% load static %}
+
+
+{% block content %}
+
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h6 class="h3 mb-0 text-gray-800">Profile / {{ data.full_name }}</h6>
+
+    </div>
+
+    <div style="display: flex; justify-content: center; align-items: center">
+        <a href="{% url 'profile_page_edit' data.slug %}" class="btn btn-primary" style="margin:0px 10px 0px 10px;">
+
+            <span class="text"> Edit </span>
+        </a>
+
+        <a href="{% url 'profiles' %}" class="btn btn-secondary " style="margin:0px 10px 0px 10px;">
+
+            <span class="text"> Back </span>
+        </a>
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-record"
+                style="margin:0px 10px 0px 10px;">Delete Record
+        </button>
+    </div>
+
+    <hr>
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h5 class="m-0 font-weight-bold text-primary">Personal Information</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm" style="margin-top: 10px">
+                    <div class="row">
+                        <div class="col-4" style="padding-top: 5px ; ">
+                            <label for="first_name_input">First Name</label>
+                        </div>
+                        <div class="col">
+                            <input type="text" name="first_name_input" class="form-control"
+                                   value="{{ data.first_name }}" readonly style="background: white">
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-sm" style="margin-top: 10px">
+                    <div class="row">
+                        <div class="col-4" style="padding-top: 5px ; ">
+                            <label for="middle_name_input">Middle Name</label>
+                        </div>
+                        <div class="col">
+                            <input type="text" name="middle_name_input" class="form-control"
+                                   value="{{ data.middle_name | default_if_none:""  }}" readonly style="background: white">
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-sm" style="margin-top: 10px">
+                    <div class="row">
+                        <div class="col-4" style="padding-top: 5px ; ">
+                            <label for="first_name_input">Last Name</label>
+                        </div>
+                        <div class="col">
+                            <input type="text" name="first_name_input" class="form-control"
+                                   value="{{ data.last_name }}" readonly style="background: white">
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-sm" style="margin-top: 10px">
+                    <div class="row">
+
+
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="row">
+                <div class="col-sm" style="margin-top: 10px">
+                    <div class="row">
+                        <div class="col-4" style="padding-top: 5px ; ">
+                            <label for="first_name_input">Birthday</label>
+                        </div>
+                        <div class="col">
+                            <input type="text" name="first_name_input" class="form-control"
+                                   value="{{ data.birthday| default_if_none:"" }}" readonly style="background: white">
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-sm" style="margin-top: 10px">
+                    <div class="row">
+                        <div class="col-4" style="padding-top: 5px ; ">
+                            <label for="middle_name_input">Age</label>
+                        </div>
+                        <div class="col">
+                            <input type="text" name="middle_name_input" class="form-control"
+                                   value="{{ data.age | default_if_none:"" }}" readonly style="background: white">
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-sm" style="margin-top: 10px">
+                    <div class="row">
+                        <div class="col-4" style="padding-top: 5px ; ">
+                            <label for="first_name_input">Purok</label>
+                        </div>
+                        <div class="col">
+                            <input type="text" name="first_name_input" class="form-control"
+                                   value="{{ data.purok | default_if_none:""  }}" readonly style="background: white">
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-sm" style="margin-top: 10px">
+                    <div class="row">
+                        <div class="col-4" style="padding-top: 5px ; ">
+                            <label for="middle_name_input">Sex</label>
+                        </div>
+                        <div class="col">
+                            <input type="text" name="middle_name_input" class="form-control"
+                                   value="{{ data.sex | default_if_none:""  }}" readonly style="background: white">
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h5 class="m-0 font-weight-bold text-primary">Education Information</h5>
+        </div>
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-sm" style="margin-top: 10px">
+                    <div class="row">
+                        <div class="col-4" style="padding-top: 5px ; ">
+                            <label for="first_name_input">Education Level</label>
+                        </div>
+                        <div class="col">
+                            <input type="text" name="first_name_input" class="form-control"
+                                   value="{{ data.education_level }} " readonly style="background: white">
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-sm" style="margin-top: 10px">
+                    <div class="row">
+                        <div class="col-4" style="padding-top: 5px ; ">
+                            <label for="middle_name_input">Education Year</label>
+                        </div>
+                        <div class="col">
+                            <input type="text" name="middle_name_input" class="form-control"
+                                   value="{{ data.education_year| default_if_none:"" }}" readonly style="background: white">
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-sm" style="margin-top: 10px">
+                    <div class="row">
+                        <div class="col-2 col-xs-4" style="padding-top: 5px ; ">
+                            <label for="first_name_input">School</label>
+                        </div>
+                        <div class="col">
+                            <input type="text" name="first_name_input" class="form-control"
+                                   value="{{ data.school | default_if_none:"" }}" readonly style="background: white">
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="modal fade" id="delete-record" tabindex="-1" role="dialog" aria-labelledby="delete-record"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Delete Record?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Select "Confirm Delete" if you want to delete this record
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <form method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger" value="deleteee" name="delete">Confirm Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+{% endblock %}

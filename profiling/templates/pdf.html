@@ -1,0 +1,145 @@
+{% load static %}
+<html>
+<head>
+    <style>
+        * {
+            font-size: 15px;
+        }
+
+        table {
+            table-layout: fixed;
+            width: 100%;
+            border: 1px solid black;
+        }
+
+        table th {
+            text-align: left;
+            padding: 3px;
+            padding-bottom: 0;
+        }
+
+        table td {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding: 3px;
+            padding-bottom: 0;
+        }
+
+        @page {
+            size: 8.5in 13in;
+            @frame header_frame {
+            -pdf-frame-content: header_content;
+            left: 72pt;
+            width: 468pt;
+            top: 72pt;
+            height: 300pt
+        }
+
+        @frame content_frame {
+        left:72pt;
+        width:468pt;
+        top:242pt;
+        height:570pt;
+        }
+        @frame footer_frame {
+        -pdf-frame-content:footer_content;
+        left:72pt;
+        width:468pt;
+        top:812pt;
+
+        height:100pt
+        }
+
+        }
+
+        #table-footer {
+
+            border: none;
+
+        }
+
+
+    </style>
+        <link rel="icon" href="{% static 'dashboard/img/sklogo.png' %}">
+    <title>SK Diamante</title>
+
+</head>
+
+<body>
+<div id="header_content">
+    <table style="border: none">
+        <tr>
+            <td style="width: 20%"><img src="http://skdiamante.pythonanywhere.com{% static 'dashboard/img/sklogo.png' %}" alt=""></td>
+            <td style="text-align: center">
+                <p style="padding-bottom: -30px; padding-top: -20px">Republic of the Philippines</p>
+                <p style="padding-bottom: -30px">Province of Sorsogon</p>
+                <p style="padding-bottom: -30px">Municipality of Prieto-Diaz</p>
+                <p style="padding-bottom: -20px;"><b>BARANGAY DIAMANTE</b></p>
+                <p style="padding-bottom: -30px"><b>OFFICE OF THE SANGGUNIANG KABATAAN</b></p>
+            </td>
+            <td style="width: 20%"><img src="http://skdiamante.pythonanywhere.com{% static 'dashboard/img/Pdiaz.png' %}" alt=""></td>
+        </tr>
+    </table>
+
+    <div style="padding-top: 10px">
+        {% if grade == "OutofSchool" %}
+            <p style="text-align: center;padding-bottom: -20px"><b>Out of School</b></p>
+            <p style="text-align: center"><b>List of Out of School SK members who received {{ header }}</b></p>
+        {% elif grade == "College" %}
+            <p style="text-align: center;padding-bottom: -20px"><b>College</b></p>
+            <p style="text-align: center"><b>List of College Students who received {{ header}}</b></p>
+        {% elif grade == "Graduates" %}
+            <p style="text-align: center;padding-bottom: -20px"><b>Graduates</b></p>
+            <p style="text-align: center"><b>List of Graduate SK members who received {{ header}}</b></p>
+        {% else %}
+            <p style="text-align: center;padding-bottom: -20px"><b>Grade {{ grade }}</b></p>
+            <p style="text-align: center"><b>List of Grade {{ grade }} Students who received {{ header }}</b></p>
+        {% endif %}
+
+    </div>
+
+
+</div>
+
+<div id="content_frame">
+    <table>
+        <tr>
+            <th style="text-align: center"> Name</th>
+            <th style="text-align: center"> Date Received</th>
+            <th style="text-align: center"> Signature</th>
+        </tr>
+        {% for data in record %}
+            <tr>
+                <td style="width: 40%; text-align: center"> {{ data.full_name }} </td>
+                <td style="width: 30%; text-align: left;"></td>
+                <td style="width: 30%;"></td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<div id="footer_content">
+    <p>Prepared by:</p>
+
+    <table id="table-footer">
+        <tr>
+            <td style="text-align: center">
+                <p style="padding-bottom: -35px"><b><u>Frally D. Elma</u></b></p>
+                <p>SK Secretary</p>
+            </td>
+            <td style="text-align: center">
+                <p style="padding-bottom: -35px"><b><u>Criselda E. Vitor</u></b></p>
+                <p>SK Treasurer</p>
+            </td>
+            <td style="text-align: center">
+                <p style="padding-bottom: -35px"><b><u>Mara Jeanette E. Dorado</u></b></p>
+                <p>SK Chairperson</p>
+            </td>
+        </tr>
+    </table>
+
+
+</div>
+</body>
+</html>

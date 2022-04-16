@@ -1,0 +1,63 @@
+{% extends 'dashboard/index.html' %}
+{% load static %}
+
+
+
+{% block content %}
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Generate Documents</h1>
+
+    </div>
+
+    <div class="card mb-4 py-3 border-left-primary">
+        <div class="card-body">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Document Header:</label>
+                    <input type="text" class="form-control" placeholder="Enter document header" id="header_input"
+                           name="header_input">
+                    <div style="display: flex; text-align: center; align-items: center; justify-content: center">
+                        <button type="submit" class="btn btn-primary" style="margin-top: 10px">Generate</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+        {% if datas %}
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Generate Documents by Year Level</h6>
+        </div>
+        <div class="card-body">
+
+            <p>Header: {{ datas.header }}</p>
+            <div class="table-responsive">
+                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0"
+                                   role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+
+
+                                <tbody>
+
+                                {% for list in templist %}
+                                <tr>
+                                    <td width="20%">{{ list.grade }}</td>
+                                    <td><a href="{% url 'get_document' list.code datas.code %}" target="_blank">Download {{ list.grade }} list</a></td>
+                                </tr>
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+        {% endif %}
+{% endblock %}
