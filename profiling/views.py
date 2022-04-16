@@ -7,7 +7,6 @@ from django.core.exceptions import ValidationError
 from django.db.models.functions import Lower
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
-from pdfkit import pdfkit
 from reportlab.lib.units import inch
 from django.contrib.auth.decorators import login_required
 
