@@ -6,6 +6,7 @@ from django.db.models.functions import Lower
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from reportlab.lib.units import inch
+from django.contrib.auth.decorators import login_required
 
 from .models import Profile
 from django.utils.text import slugify
@@ -20,6 +21,7 @@ def page_not_found_view(request, exception):
 def landing_page(response):
     return render(response, "landing_page/index.html")
 
+@login_required
 def dashboard(response):
     current_user = response.user
 
@@ -85,7 +87,7 @@ def dashboard(response):
 
 
     })
-
+@login_required
 def profile(response):
     datas = Profile.objects.all().order_by(Lower('last_name'))
     current_user = response.user
@@ -95,7 +97,7 @@ def profile(response):
         'current_user': current_user,
 
     })
-
+@login_required
 def profile_filter_year(response):
     datas = Profile.objects.all().order_by('education_year')
     current_user = response.user
@@ -105,7 +107,7 @@ def profile_filter_year(response):
         'current_user': current_user,
 
     })
-
+@login_required
 def profile_filter_level(response):
     datas = Profile.objects.all().order_by('education_level')
     print(datas)
@@ -116,7 +118,7 @@ def profile_filter_level(response):
         'current_user': current_user,
 
     })
-
+@login_required
 def profile_page(response, slug):
 
     data = get_object_or_404(Profile, slug=slug)
@@ -131,7 +133,7 @@ def profile_page(response, slug):
         'current_user': current_user,
 
     })
-
+@login_required
 def profile_page_edit(response,slug):
     data = get_object_or_404(Profile, slug=slug)
     form = profile_form(response.POST or None, instance=data)
@@ -170,7 +172,7 @@ def profile_page_edit(response,slug):
         'current_user': current_user,
 
     })
-
+@login_required
 def add_profile(response):
     form = profile_form()
     current_user = response.user
@@ -220,7 +222,7 @@ val = None
 
 
 
-
+@login_required
 def generate_document(response):
     current_user = response.user
 
@@ -267,7 +269,7 @@ def generate_document(response):
         'templist':templist,
 
     })
-
+@login_required
 def getPdfPage(request, grade, header):
     ok = val()
     print("OK", ok)
