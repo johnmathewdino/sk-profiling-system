@@ -3,13 +3,18 @@ from django.db import models
 # Create your models here.
 class Profile (models.Model):
     education_level_choices = (
+
         ("College","College"),
         ("High School","High School"),
         ("Elementary","Elementary"),
+        ("Kindergarten", "Kindergarten"),
+        ("Day Care", "Day Care"),
         ("Out of School","Out of School"),
         ("Graduates","Graduates")
     )
     education_year_choices = (
+        ("K1", "K1"),
+        ("K2", "K2"),
         ("Grade 1","Grade 1"),
         ("Grade 2", "Grade 2"),
         ("Grade 3", "Grade 3"),

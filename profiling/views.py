@@ -1,17 +1,11 @@
-import os
+
 
 from appdirs import unicode
 from django.contrib import messages
-from django.contrib.auth.models import User
-from django.core.exceptions import ValidationError
 from django.db.models.functions import Lower
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
-from reportlab.lib.units import inch
 from django.contrib.auth.decorators import login_required
-
-import sk_profiling.settings
-from sk_profiling import settings
 from .models import Profile
 from django.utils.text import slugify
 from .forms import profile_form
@@ -55,14 +49,6 @@ def dashboard(response):
 
     print(g7, g8, g9, g10, g11, g12)
 
-
-
-
-
-
-
-
-
     return render(response, "dashboard/index.html",{
         "current_user":current_user,
         "hs_count":high_school_count,
@@ -101,27 +87,7 @@ def profile(response):
         'current_user': current_user,
 
     })
-@login_required
-def profile_filter_year(response):
-    datas = Profile.objects.all().order_by('education_year')
-    current_user = response.user
 
-    return render(response, "profiles/profiles-filter-year.html",{
-        'datas':datas,
-        'current_user': current_user,
-
-    })
-@login_required
-def profile_filter_level(response):
-    datas = Profile.objects.all().order_by('education_level')
-    print(datas)
-    current_user = response.user
-
-    return render(response, "profiles/profiles-filter-level.html",{
-        'datas':datas,
-        'current_user': current_user,
-
-    })
 @login_required
 def profile_page(response, slug):
 
@@ -142,33 +108,30 @@ def profile_page_edit(response,slug):
     data = get_object_or_404(Profile, slug=slug)
     form = profile_form(response.POST or None, instance=data)
     current_user = response.user
+    search = Profile.objects.get(slug=slug)
 
-    if response.method == "POST":
-        form = profile_form(response.POST or None, instance=data)
-        if form.is_valid():
-            save = form.save(commit=False)
-
+    if form.is_valid():
+        save = form.save(commit=False)
+        if search.first_name != save.first_name or search.middle_name != save.middle_name or search.last_name != save.last_name:
             if save.middle_name != None:
-                full_name = save.first_name.title() + " " + save.middle_name[
-                    0].title() + ". " + save.last_name.title()
-                # slug = first_name.lower() + "-" + middle_name[0].lower() +"-"+ last_name.lower()
-                slug = slugify(unicode(
-                    '%s %s %s' % (save.first_name.lower(), save.middle_name.lower(), save.last_name.lower())))
-                if Profile.objects.filter(first_name = save.first_name.title(), middle_name=save.middle_name.title(), last_name=save.last_name.title()).exists():
-                    messages.error(response, full_name, "already exists.")
-                    return HttpResponseRedirect(response.path)
+                save.full_name = save.first_name.title() + " " + save.middle_name[0].title() + ". " + save.last_name
+                save.slug = slugify(unicode(save.full_name))
+                print(save.slug)
+                if Profile.objects.filter(first_name=save.first_name.title(), last_name=save.last_name.title(),
+                                          middle_name=save.middle_name.title()).exists():
+                    messages.error(response, messages.error, "")
+                    return redirect(profile_page_edit, search.slug)
+
             else:
-                full_name = save.first_name.title() + " " + save.last_name.title()
-                slug = slugify(unicode('%s %s' % (save.first_name.lower(), save.last_name.lower())))
-                if Profile.objects.filter(first_name = save.first_name.title(), middle_name=save.middle_name.title(), last_name=save.last_name.title()).exists():
-                    messages.error(response, full_name, "already exists.")
-                    return HttpResponseRedirect(response.path)
-            save.full_name = full_name
-            save.slug = slug
+                save.full_name = save.first_name.title() + " " + save.last_name
+                save.slug = slugify(unicode(save.full_name))
+                print(save.slug)
+                if Profile.objects.filter(first_name=save.first_name.title(), last_name=save.last_name.title()).exists():
+                    messages.error(response, messages.error, "")
+                    return redirect(profile_page_edit, search.slug)
+        save.save()
+        return redirect(profile)
 
-            save.save()
-
-        return redirect('profile_page', data.slug)
 
     return render(response, "profiles/profile_page_edit.html", {
         "data": data,
@@ -308,6 +271,7 @@ def getPdfPage(request, grade, header):
     pdfPage = pisa.pisaDocument(BytesIO(data_p.encode("UTF-8")), response)
     if not pdfPage.err:
         return HttpResponse(response.getvalue(), content_type="application/pdf")
+
     else:
         return HttpResponse("Error Generating PDF")
 
